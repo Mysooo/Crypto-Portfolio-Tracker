@@ -3,24 +3,42 @@ import './styles.css';
 import Button from '../../Button';
 import iphone from '../../../assets/iphone.png';
 import gradient from '../../../assets/gradient.png';
-
+import { motion } from 'framer-motion';
 const MainComponent = () => {
   return (
     <div className='flex-info'>
       <div className='left-component'>
-        <h1 className='track-crypto'>Track Crypto</h1>
-        <h1 className='real-time'>Real Time.</h1>
-        <p className='info-text'>
+        <motion.h1 className='track-crypto' 
+        initial={{opacity:0, y:50}}
+        animate={{opacity:1, y:0}}
+        transition={{duration: 0.5}}>Track Crypto</motion.h1>
+        <motion.h1 className='real-time'
+        initial={{opacity:0, y:50}}
+        animate={{opacity:1, y:0}}
+        transition={{duration: 0.5,delay:0.5}}>Real Time.</motion.h1>
+        <motion.p className='info-text'
+        initial={{opacity:0, y:50}}
+        animate={{opacity:1, y:0}}
+        transition={{duration: 0.5,delay:1}}>
           Track crypto through a public API in real time. Visit the dashboard to do so!
-        </p>
-        <div className='btn-flex'>
+        </motion.p>
+        <motion.div className='btn-flex'
+        initial={{opacity:0, y:50}}
+        animate={{opacity:1, y:0}}
+        transition={{duration: 0.5,delay:1.5}}>
           <Button text="Dashboard" onClick={() => console.log('Dashboard clicked')} />
           <Button text="Share" outlined={true} onClick={() => console.log('Share clicked')} />
-        </div>
+        </motion.div>
       </div>
       <div className='phone-container'>
-        <img src={iphone} alt="iPhone" className='iphone' />
-        <img src={gradient} alt="Gradient" className='gradient' />
+        <motion.img src={iphone} alt="iPhone" className='iphone'
+        initial= {{y:-10}}
+        animate={{y:10}}
+        transition={{type: "smooth",
+        repeatType: "mirror",
+        duration: 2,
+        repeat:Infinity}} />
+        <motion.img src={gradient} alt="Gradient" className='gradient' />
       </div>
     </div>
   );

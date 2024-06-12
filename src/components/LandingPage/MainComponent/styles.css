@@ -48,16 +48,16 @@
 .iphone {
     position: absolute;
     z-index: 100;
-    min-width: 300px;
-    width: 50%;
+    min-width: 250px;
+    width: 45%;
     right: 0;
 }
 
 .gradient {
     position: absolute;
-    min-width: 250px;
-    width: 40%;
-    top: 8rem;
+    min-width: 200px;
+    width: 35%;
+    top: 7rem;
     right: 0;
 }
 
@@ -92,10 +92,10 @@
         margin-top: 3rem;
     }
     .iphone {
-        left:-2rem;
+        left: -2rem;
     }
     .gradient {
-        left: -8%;
+        left: 1%;
     }
     .left-component{
         width: 100%;
