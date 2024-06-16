@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Grid from '../Grid';
 import './styles.css'
+import List from '../List';
 export default function TabComponent({ coins }) {
   const [value, setValue] = useState('grid');
 
@@ -44,13 +45,11 @@ export default function TabComponent({ coins }) {
           </div>
         </TabPanel>
         <TabPanel value="list">
-          <div>
-            {coins.map((item, i) => (
-              <p key={i}>
-                {i + 1}.{item.id}
-              </p>
+          <table className='list-table'>
+          {coins.map((coin, i) => (
+              <List coin= {coin} key ={i}  />
             ))}
-          </div>
+          </table>
         </TabPanel>
       </TabContext>
     </ThemeProvider>
