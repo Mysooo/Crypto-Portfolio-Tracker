@@ -45,7 +45,7 @@
 }
 .price-chip{
     border: 2px solid var(--green);
-    border-radius: 2rem;
+    border-radius: 1.90rem;
     padding: 0.35rem 1.25rem;
     color: var(--green);
     font-size: 1rem;
