@@ -35,7 +35,7 @@ function CoinPage() {
                     {coin.image && coin.image.large ? (
                         <img src={coin.image.large} alt={coin.name} />
                     ) : (
-                        <p>Image not availabl</p>
+                        <p>Image not avaiabl</p>
                     )}
                 </>
             )}
