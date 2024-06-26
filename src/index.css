@@ -118,3 +118,12 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+.grey-wrapper {
+  justify-content: center; /* Center horizontally */
+  width: 90%;
+  padding: 1rem;
+  background-color: var(--darkgrey);
+  margin: 1.5rem auto; /* Center the wrapper itself horizontally */
+  border-radius: 0rem 0.8rem;
+}
+

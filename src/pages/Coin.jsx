@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'; // Ensure axios is imported
+import axios from 'axios'; 
 import Header from '../components/Common/Header';
 import Loader from '../components/Common/Loader';
+import { CoinObject } from '../functions/convertObjects'; // Ensure the correct path
+import List from "../components/Dashboard/List";
+import CoinInfo from '../components/Coin/CoinInfo'; // Correct import
 
 function CoinPage() {
     const { id } = useParams();
@@ -15,14 +18,15 @@ function CoinPage() {
                 .get(`https://api.coingecko.com/api/v3/coins/${id}`)
                 .then((response) => {
                     console.log("RESPONSE>>>", response.data);
-                    setCoin(response.data); // Update state with coin data
+                    CoinObject(setCoin, response.data); 
                     setIsLoading(false);
                 })
                 .catch((error) => {
                     console.log("ERROR>>>", error.message);
+                    setIsLoading(false); 
                 });
         }
-    }, [id]); // Use parentheses and correct dependency array
+    }, [id]); 
 
     return (
         <div>
@@ -31,12 +35,10 @@ function CoinPage() {
                 <Loader />
             ) : (
                 <>
-                    <h1>{coin.name}</h1>
-                    {coin.image && coin.image.large ? (
-                        <img src={coin.image.large} alt={coin.name} />
-                    ) : (
-                        <p>Image not avaiabl</p>
-                    )}
+                    <div className='grey-wrapper'>
+                        <List coin={coin}></List>   
+                    </div>
+                    <CoinInfo heading={coin.name} desc={coin.desc} /> {/* Correct component usage */}
                 </>
             )}
         </div>
