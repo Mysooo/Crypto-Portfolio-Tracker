@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Header from '../components/Common/Header';
 import Loader from '../components/Common/Loader';
 import { CoinObject } from '../functions/convertObjects'; // Ensure the correct path
@@ -10,52 +9,50 @@ import { getCoinData } from '../functions/getCoinData';
 import { getCoinPrices } from '../functions/getCoinPrices';
 import LineChart from '../components/Coin/LineChart';
 import SelectDays from '../components/Coin/SelectDays';
+import PriceType from '../components/PriceType';
+import { settingChartData } from '../functions/settingChartData'; // Import the function
 
 function CoinPage() {
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-    const [coin, setCoin] = useState(null);
-    const [days, setDays] = useState(30);
+    const [coin, setCoin] = useState(null); // Define state for coin data
+    const [days, setDays] = useState(30); // Add state for days
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+    const [priceType, setPriceType] = useState('prices');
 
     useEffect(() => {
         if (id) {
             getData();
         }
-    }, [id, days]);
+    }, [id, days, priceType]); // Depend on id, days, and priceType to re-fetch data when any changes
 
     async function getData() {
         try {
+            setIsLoading(true); // Show loader during fetching
             const data = await getCoinData(id);
             if (data) {
                 CoinObject(setCoin, data);
-                const prices = await getCoinPrices(id, days);
+                const prices = await getCoinPrices(id, days, priceType);
                 if (prices.length > 0) {
-                    setChartData({
-                        labels: prices.map(price => new Date(price[0]).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
-                        datasets: [
-                            {
-                                data: prices.map(price => price[1]),
-                                borderColor: "#3a80e9",
-                                backgroundColor: "rgba(58,128,233,0.1)",
-                                borderWidth: 1,
-                                fill: true,
-                                tension: 0.25,
-                                pointRadius: 0,
-                            }
-                        ]
-                    });
+                    console.log("Prices fetched successfully");
+                    settingChartData(setChartData, prices); // Use the imported function here
                 }
-                setIsLoading(false);
+                setIsLoading(false); // Hide loader after fetching
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            setIsLoading(false);
+            setIsLoading(false); // Hide loader on error
         }
     }
 
+    // Handler function for changing the days
     const handleDaysChange = (e) => {
         setDays(e.target.value);
+    };
+
+    // Handler function for changing the price type
+    const handlePriceTypeChange = (event, newType) => {
+        setPriceType(newType); // Update the price type
     };
 
     return (
@@ -69,10 +66,9 @@ function CoinPage() {
                         <List coin={coin} />
                     </div>
                     <div className='grey-wrapper'>
-                        <div className="chart-container">
-                            <SelectDays days={days} handleDaysChange={handleDaysChange} />
-                            <LineChart chartData={chartData} height={600} width={800} />
-                        </div>
+                        <SelectDays days={days} handleDaysChange={handleDaysChange} />
+                        <PriceType priceType={priceType} handlePriceTypeChange={handlePriceTypeChange} />
+                        <LineChart chartData={chartData} height={600} width={800} />
                     </div>
                     {coin && (
                         <CoinInfo heading={coin.name} desc={coin.desc} />

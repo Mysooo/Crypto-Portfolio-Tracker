@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import "./styles.css";
 
 function CoinInfo({ heading, desc }) {
+  // Function to strip HTML tags
+  const stripHtmlTags = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  };
+
   // Constants for short and long descriptions
-  const shortDesc = desc.slice(0, 350);
-  const longDesc = desc;
+  const shortDesc = stripHtmlTags(desc).slice(0, 350);
+  const longDesc = stripHtmlTags(desc);
 
   // State for toggle
   const [flag, setFlag] = useState(false);
