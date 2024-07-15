@@ -126,3 +126,11 @@ img {
   margin: 1.5rem auto; /* Center the wrapper itself horizontally */
   border-radius: 0rem 0.8rem;
 }
+.coins-days-flex{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1.5rem;
+  gap: 2rem;
+
+}

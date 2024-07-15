@@ -4,7 +4,7 @@ import "./styles.css";
 
 function SelectDays({ days, handleDaysChange, noPTag }) {
   return (
-    <div className="select-days" style={{ marginBottom: noPTag && "0" }}>
+    <div className="select-days">
       {!noPTag && <p>Price change in </p>}
       <Select
         value={days}

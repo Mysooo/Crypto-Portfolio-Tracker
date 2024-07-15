@@ -7,7 +7,7 @@ export const getCoinData = (id) => {
             return response.data;
         })
         .catch((error) => {
-            console.log("Error fetching coin data:", error.message);
+           
             throw error; // Propagate the error to handle it in the calling function
         });
     

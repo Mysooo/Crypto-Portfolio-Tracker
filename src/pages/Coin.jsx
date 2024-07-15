@@ -34,9 +34,10 @@ function CoinPage() {
                 CoinObject(setCoin, data);
                 const prices = await getCoinPrices(id, days, priceType);
                 if (prices.length > 0) {
-                    console.log("Prices fetched successfully");
+                    
                     settingChartData(setChartData, prices); // Use the imported function here
                 }
+                
                 setIsLoading(false); // Hide loader after fetching
             }
         } catch (error) {
@@ -44,6 +45,7 @@ function CoinPage() {
             setIsLoading(false); // Hide loader on error
         }
     }
+   
 
     // Handler function for changing the days
     const handleDaysChange = (e) => {
@@ -80,3 +82,4 @@ function CoinPage() {
 }
 
 export default CoinPage;
+//"Smoke, relax, and look good doing it."

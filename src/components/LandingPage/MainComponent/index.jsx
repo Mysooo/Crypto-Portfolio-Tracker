@@ -26,8 +26,8 @@ const MainComponent = () => {
         initial={{opacity:0, y:50}}
         animate={{opacity:1, y:0}}
         transition={{duration: 0.5,delay:1.5}}>
-          <Button text="Dashboard" onClick={() => console.log('Dashboard clicked')} />
-          <Button text="Share" outlined={true} onClick={() => console.log('Share clicked')} />
+          <Button text="Dashboard"/>
+          <Button text="Share" outlined={true}  />
         </motion.div>
       </div>
       <div className='phone-container'>
